@@ -161,6 +161,32 @@ if uploaded is not None:
     col4.metric("Total Energy",   f"{preds.sum() / 1000:.2f} GWh",
                 help=f"Over {n_hours} hours")
 
+    # ── Predictions table ─────────────────────────────────────────────────────
+    st.markdown("---")
+    st.subheader("🔢 Hourly Predictions")
+
+    display_df = df_out.copy()
+    display_df.columns = ["Time", "Wind Speed at 100m (m/s)", "Predicted Power (MW)"]
+    display_df["Time"] = display_df["Time"].dt.strftime("%Y-%m-%d %H:%M")
+    display_df["Wind Speed at 100m (m/s)"] = display_df["Wind Speed at 100m (m/s)"].round(2)
+    display_df["Predicted Power (MW)"] = display_df["Predicted Power (MW)"].round(2)
+
+    st.dataframe(
+        display_df,
+        use_container_width=True,
+        height=400,
+        hide_index=True,
+        column_config={
+            "Predicted Power (MW)": st.column_config.ProgressColumn(
+                "Predicted Power (MW)",
+                help="Predicted power output",
+                min_value=0,
+                max_value=113,
+                format="%.1f MW",
+            ),
+        }
+    )
+
     # ── Time series ───────────────────────────────────────────────────────────
     st.markdown("---")
     st.subheader("📈 Predicted Power — Time Series")
