@@ -77,8 +77,6 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Wind_turbine_at_Boco_Rock.jpg/320px-Wind_turbine_at_Boco_Rock.jpg",
-             use_container_width=True, caption="Boco Rock Wind Farm, NSW")
     st.markdown("## 🌬️ Model Info")
     st.markdown("""
 | Metric | Value |
